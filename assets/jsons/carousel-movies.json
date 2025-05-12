@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "title": "A Working Man",
+    "poster": "/assets/images/carousel-resources/movie-1-poster.jpg",
+    "landscape":"/assets/images/carousel-resources/movie-1-landscape-poster.jpg",
+    "trailer": "/assets/images/carousel-resources/movie-1-trailer.mp4",
+    "background": "/assets/images/carousel-resources/movie-1-background.jpg",
+    "description": "Levon Cade left behind a decorated military career in the black ops to live a simple life working construction. But when his boss's daughter, who is like family to him, is taken by human traffickers, his search to bring her home uncovers a world of corruption far greater than he ever could have imagined."
+  },
+  {
+    "id": 1,
+    "title": "Moana 2",
+    "poster": "/assets/images/carousel-resources/movie-2-poster.jpg",
+    "landscape":"/assets/images/carousel-resources/movie-2-landscape-poster.jpg",
+    "trailer": "/assets/images/carousel-resources/movie-2-trailer.mp4",
+    "background": "/assets/images/carousel-resources/movie-2-background.jpg",
+    "description": "After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced."
+  },
+  {
+    "id": 2,
+    "title": "ASH",
+    "poster": "/assets/images/carousel-resources/movie-3-poster.jpg",
+    "landscape":"/assets/images/carousel-resources/movie-3-landscape-poster.jpg",
+    "trailer": "/assets/images/carousel-resources/movie-3-trailer.mp4",
+    "background": "/assets/images/carousel-resources/movie-3-background.jpg",
+    "description": "HA woman wakes up on a distant planet and finds the crew of her space station viciously killed. Her investigation into what happened sets in motion a terrifying chain of events."
+  },
+  {
+    "id": 3,
+    "title": "Havoc",
+    "poster": "/assets/images/carousel-resources/movie-4-poster.jpg",
+    "landscape":"/assets/images/carousel-resources/movie-4-landscape-poster.jpg",
+    "trailer": "/assets/images/carousel-resources/movie-4-trailer.mp4",
+    "background": "/assets/images/carousel-resources/movie-4-background.jpg",
+    "description": "When a drug heist swerves lethally out of control, a jaded cop fights his way through a corrupt city's criminal underworld to save a politician's son."
+  },
+  {
+    "id": 4,
+    "title": "A Minecraft Movie",
+    "poster": "/assets/images/carousel-resources/movie-5-poster.jpg",
+    "landscape":"/assets/images/carousel-resources/movie-5-landscape-poster.jpg",
+    "trailer": "/assets/images/carousel-resources/movie-5-trailer.mp4",
+    "background": "/assets/images/carousel-resources/movie-5-background.jpg",
+    "description": "Four misfits find themselves struggling with ordinary problems when they are suddenly pulled through a mysterious portal into the Overworld: a bizarre, cubic wonderland that thrives on imagination. To get back home, they'll have to master this world while embarking on a magical quest with an unexpected, expert crafter, Steve."
+  }
+]

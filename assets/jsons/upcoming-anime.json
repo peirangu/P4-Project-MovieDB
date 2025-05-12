@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Rick and Morty Season 8",
+    "year": 2025,
+    "image": "./assets/images/upcoming-anime-1.png",
+    "badge": "2K",
+    "duration": "23 min",
+    "rating": "8.7"
+  },
+  {
+    "title": "Solo Leveling",
+    "year": 2025,
+    "image": "./assets/images/upcoming-anime-2.png",
+    "badge": "2K",
+    "duration": "24 min",
+    "rating": "8.6"
+  },
+  {
+    "title": "Case Closed",
+    "year": 2025,
+    "image": "./assets/images/upcoming-anime-3.png",
+    "badge": "2K",
+    "duration": "25 min",
+    "rating": "8.0"
+  },
+  {
+    "title": "TO BE HERO X",
+    "year": 2025,
+    "image": "./assets/images/upcoming-anime-4.png",
+    "badge": "4K",
+    "duration": "23 min",
+    "rating": "9.0"
+  }
+]
