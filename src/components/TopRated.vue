@@ -74,7 +74,7 @@ const toggleView = () => {
 };
 
 onMounted(async () => {
-  const res = await fetch("/assets/jsons/top-rated.json");
+  const res = await fetch("assets/jsons/top-rated.json");
   movies.value = await res.json();
 });
 </script>

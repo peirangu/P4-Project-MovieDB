@@ -23,7 +23,7 @@ import { ref, onMounted} from 'vue';
 const QAs  = ref([]);
 
 onMounted(async ()=>{
-    const res = await fetch("/assets/jsons/QA.json");
+    const res = await fetch("assets/jsons/QA.json");
     QAs.value = await res.json();
 })
 </script>

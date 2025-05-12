@@ -2,7 +2,6 @@
   <header class="sticky-top bg-dark bg-opacity-90">
     <nav class="navbar navbar-expand-lg navbar-dark p-1">
       <div class="container">
-        <!-- Logo -->
         <router-link class="navbar-brand d-flex align-items-center" to="/">
           <div
             class="rounded-circle bg-gradient p-2 me-2"
@@ -21,7 +20,6 @@
           >
         </router-link>
 
-        <!-- Mobile menu button -->
         <button
           class="navbar-toggler"
           type="button"
@@ -31,10 +29,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Main navigation -->
         <nav class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <!-- Movies dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -68,7 +64,6 @@
               </ul>
             </li>
 
-            <!-- TV Shows dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -112,9 +107,7 @@
             </li>
           </ul>
 
-          <!-- Right side elements -->
           <div class="d-flex align-items-center gap-4">
-            <!-- Search form -->
             <form class="d-flex me-3" @submit.prevent="handleSearch">
               <div class="input-group">
                 <input
@@ -129,7 +122,6 @@
               </div>
             </form>
 
-            <!-- Language selector -->
             <div class="dropdown me-3">
               <button
                 class="btn btn-outline-secondary dropdown-toggle"
@@ -146,7 +138,6 @@
               </ul>
             </div>
 
-            <!-- Sign in button -->
             <button
               class="btn btn-primary"
               style="

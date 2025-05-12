@@ -6,7 +6,7 @@
 
             <h2 class="h2 section-title">World Best TV Series</h2>
 
-            <ul class="has-scrollbar d-flex flex-row justify-content-between gap-3 pb-3 ps-0" id="tvSeries">
+            <ul class="has-scrollbar d-flex flex-row justify-content-between gap-3 pb-3 ps-1 pt-1 pe-1" id="tvSeries">
                 <MovieCard v-for="movie in movies" :key="movie.title" :movie="movie">
                 </MovieCard>
             </ul>
@@ -21,7 +21,7 @@ import { ref, onMounted } from 'vue';
 const movies = ref([])
 
 onMounted(async () => {
-    const res = await fetch('/assets/jsons/world-best-TV-series.json');
+    const res = await fetch('assets/jsons/world-best-TV-series.json');
     movies.value = await res.json()
 })
 </script>

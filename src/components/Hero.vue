@@ -1,7 +1,8 @@
 <template>
   <section class="hero rounded m-auto mt-3 m-lg-0">
     <div class="position-relative d-flex flex-column justify-content-center align-items-center">
-      <div class="carousel position-relative d-flex flex-column">
+      <div class="carousel position-relative d-flex flex-column"
+           v-bind="isMobile ? mobileTouchEvents : {}">
         <figure class="position-absolute w-100 m-0">
           <transition name="fade">
             <img v-if="windowWidth>=992" v-show ="isTransitioning" class="carousel-movie-background w-100" :src="currentMovie.background"
@@ -58,7 +59,19 @@
           <li
             v-for="movie in movies"
             :key="movie.id"
-            class="bg-dark bg-opacity-75 rounded overflow-hidden shadow-sm text-white text-center w-25"
+            class="bg-dark bg-opacity-75 rounded shadow-sm w-25"
+            :class="{'bg-white': movie.id === currentMovie.id }">
+            <span class="mid-list-element"></span>
+          </li>
+        </ul>
+
+        <ul
+          class="small-list carousel-list d-md-flex d-xl-none d-flex justify-content-center gap-3 w-25 mt-5 m-auto"
+        >
+          <li
+            v-for="movie in movies"
+            :key="movie.id"
+            class="bg-dark bg-opacity-75 rounded shadow-sm"
             :class="{'bg-white': movie.id === currentMovie.id }">
             <span class="mid-list-element"></span>
           </li>
@@ -87,13 +100,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed} from 'vue';
 const windowWidth = ref(document.documentElement.clientWidth);
 const movies = ref([]);
 const currentIndex = ref(0);
 const currentMovie = ref({});
 const isTransitioning = ref(true);
 let timer = null;
+let startX = 0;
+let moveX = 0;
+let isSwiping = false;
+const mobileTouchEvents = {
+  onTouchstart: handleTouchStart,
+  onTouchmove: handleTouchMove,
+  onTouchend: handleTouchEnd,
+};
+
 
 function updateWindowWidth(){
   windowWidth.value = document.documentElement.clientWidth;
@@ -137,19 +159,62 @@ function showPrev(){
   clearTimeout(timer);
   currentIndex.value = (currentIndex.value - 1 + movies.value.length) % movies.value.length;
   renderMovie(movies.value[currentIndex.value].id);
-  startAutoPlay();
+  resumeAutoPlay();
 }
 
 function showNext(){
   clearTimeout(timer);
   currentIndex.value = (currentIndex.value + 1) % movies.value.length;
   renderMovie(movies.value[currentIndex.value].id);
-  startAutoPlay();
+  resumeAutoPlay();
 }
+
+/*-----------------------------------*\
+ * #LOGIC FOR SWIPE IN MOBILE
+\*-----------------------------------*/
+const isMobile = computed(() => windowWidth.value <= 768);
+
+function handleTouchStart(e){
+  startX = e.touches[0].clientX;
+  isSwiping = true;
+  stopAutoPlay();
+}
+
+function handleTouchMove(e){
+  if (!isSwiping) return;
+  moveX = e.touches[0].clientX - startX;
+  const carouselEl = document.querySelector('.carousel');
+  if (carouselEl) {
+    carouselEl.classList.remove('swipe-left', 'swipe-right');
+    if (moveX < -10) {
+      carouselEl.classList.add('swipe-left');
+    } else if (moveX > 10) {
+      carouselEl.classList.add('swipe-right');
+    }
+  }
+}
+
+function handleTouchEnd(){
+  if(!isSwiping) return;
+  const threshold = 50;
+  if(moveX > threshold){
+    showPrev();
+  } else if(moveX < -threshold){
+    showNext();
+  }
+  moveX = 0;
+  isSwiping = false;
+  resumeAutoPlay();
+  const carouselEl = document.querySelector('.carousel');
+  if (carouselEl) {
+    carouselEl.classList.remove('swipe-left', 'swipe-right');
+  }
+}
+
 
 onMounted(async () => {
   window.addEventListener('resize', updateWindowWidth);
-  const res = await fetch('/assets/jsons/carousel-movies.json');
+  const res = await fetch('assets/jsons/carousel-movies.json');
   movies.value = await res.json();
   currentMovie.value = movies.value[0];
   startAutoPlay();
@@ -167,6 +232,35 @@ onBeforeUnmount(() => {
   overflow: hidden;
   position: relative;
   background: var(--gunmetal-1);
+}
+
+.carousel {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+
+.carousel::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel.swipe-left::before{
+  right: 0;
+  background: radial-gradient(circle at right center, rgba(95, 95, 95, 0.9), transparent 70%);
+  opacity: 1;
+}
+.carousel.swipe-right::before {
+  left: 0;
+  background: radial-gradient(circle at left center, rgba(95, 95, 95, 0.9), transparent 70%);
+  opacity: 1;
 }
 
 .intro {
@@ -216,6 +310,20 @@ onBeforeUnmount(() => {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.small-list {
+  position: absolute;
+  z-index: 4;
+  bottom: 20px;
+  right: 40px;
+}
+
+.small-list li{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--citrine);
 }
 
 .mid-list-element {

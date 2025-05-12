@@ -138,25 +138,25 @@ const validateEmail = () => {
 const checkEmail = () => {
   if (email.value) {
     emailChecklist.value = "✔ Typing...";
-    emailError.value = ""; // Clear email error while typing
-    isTyping.value = true; // Set typing state
+    emailError.value = ""; 
+    isTyping.value = true;
   } else {
     emailChecklist.value = "";
-    isTyping.value = false; // Reset typing state
+    isTyping.value = false;
   }
 };
 
 const checkName = () => {
   if (name.value) {
-    nameError.value = ""; // Clear name error while typing
-    isNameTyping.value = true; // Set typing state for name
+    nameError.value = "";
+    isNameTyping.value = true;
   } else {
-    isNameTyping.value = false; // Reset typing state for name
+    isNameTyping.value = false;
   }
 };
 
 const stopNameTyping = () => {
-  isNameTyping.value = false; // Stop typing state for name on blur
+  isNameTyping.value = false;
 };
 
 const validateForm = () => {

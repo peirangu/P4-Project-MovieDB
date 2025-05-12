@@ -33,15 +33,22 @@ const props = defineProps({
 
 <style scoped>
 .movie-card {
-  overflow: hidden;
   width: 150px;
   height: 350px;
   flex: 0 0 auto;
   min-width: 150px;
+  
 }
+
 
 .card-banner {
   height: 225px;
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .card-banner {
+  transform: scale(1.01);
+  box-shadow: 0 0 5px var(--white);
 }
 
 .movie-card .title-wrapper p {

@@ -27,7 +27,7 @@
 
             </div>
 
-            <ul class="has-scrollbar d-flex flex-row justify-content-between gap-3 pb-3 ps-0" id="upcomingMovies">
+            <ul class="has-scrollbar d-flex flex-row justify-content-between gap-3 pb-3 ps-1 pt-1 pe-1" id="upcomingMovies">
                 <MovieCard v-for="item in currentData" :key="item.title" :movie="item">
                 </MovieCard>
             </ul>
@@ -53,11 +53,11 @@ const currentData = computed(()=>{
 });
 
 onMounted(async () => {
-    const resMovie = await fetch('/assets/jsons/upcoming-movie.json');
+    const resMovie = await fetch('assets/jsons/upcoming-movie.json');
     mediaData.movies = await resMovie.json();
-    const resTV = await fetch('/assets/jsons/upcoming-tvshow.json');
+    const resTV = await fetch('assets/jsons/upcoming-tvshow.json');
     mediaData.tvSeries = await resTV.json();
-    const resAnime = await fetch('/assets/jsons/upcoming-anime.json');
+    const resAnime = await fetch('assets/jsons/upcoming-anime.json');
     mediaData.animes = await resAnime.json();
 })
 
