@@ -1,0 +1,34 @@
+[
+  {
+    "title": "The Last of Us Season 2",
+    "year": 2025,
+    "image": "./assets/images/upcoming-tvshow-1.png",
+    "badge": "4K",
+    "duration": "45 min",
+    "rating": "8.6"
+  },
+  {
+    "title": "Law & Order: Special Victims Unit Season 26",
+    "year": 2025,
+    "image": "./assets/images/upcoming-tvshow-2.png",
+    "badge": "4K",
+    "duration": "37 min",
+    "rating": "7.9"
+  },
+  {
+    "title": "Andor Season 2",
+    "year": 2025,
+    "image": "./assets/images/upcoming-tvshow-3.png",
+    "badge": "2K",
+    "duration": "43 min",
+    "rating": "8.2"
+  },
+  {
+    "title": "Severance Season 2",
+    "year": 2025,
+    "image": "./assets/images/upcoming-tvshow-4.png",
+    "badge": "2K",
+    "duration": "45 min",
+    "rating": "8.4"
+  }
+]
