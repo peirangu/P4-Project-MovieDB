@@ -1,40 +1,33 @@
 <template>
   <section class="hero rounded m-auto mt-3 m-lg-0">
     <div class="position-relative d-flex flex-column justify-content-center align-items-center">
-      <div class="carousel position-relative d-flex flex-column"
-           v-bind="isMobile ? mobileTouchEvents : {}">
+      <div class="carousel position-relative d-flex flex-column" v-bind="isMobile ? mobileTouchEvents : {}">
         <figure class="position-absolute w-100 m-0">
           <transition name="fade">
-            <img v-if="windowWidth>=992" v-show ="isTransitioning" class="carousel-movie-background w-100" :src="currentMovie.background"
-              :alt="currentMovie.title"  />
-            <img v-else v-show ="isTransitioning" class="carousel-movie-background w-100" :src="currentMovie.landscape"
-              :alt="currentMovie.title" key="currentMovie.id"/>
+            <img v-if="windowWidth >= 992" v-show="isTransitioning" class="carousel-movie-background w-100"
+              :src="currentMovie.background" :alt="currentMovie.title" />
+            <img v-else v-show="isTransitioning" class="carousel-movie-background w-100" :src="currentMovie.landscape"
+              :alt="currentMovie.title" key="currentMovie.id" />
           </transition>
         </figure>
 
-        
+
         <div
-          class="intro d-none d-none d-lg-flex position-relative row align-items-center justify-content-center text-white g-5 show"
-        >
+          class="intro d-none d-none d-lg-flex position-relative row align-items-center justify-content-center text-white g-5 show">
           <div class="col-6 col-xl-5">
-            <div 
-            @mouseover="stopAutoPlay" @mouseout="resumeAutoPlay" 
-            class="word">
+            <div @mouseover="stopAutoPlay" @mouseout="resumeAutoPlay" class="word">
               <h3 class="mb-3">{{ currentMovie.title }}</h3>
               <p class="fs-6">{{ currentMovie.description }}</p>
             </div>
             <div class="action">
-              <button
-                class="btn btn-warning text-white btn-lg px-4 py-2"
-              >
+              <button class="btn btn-warning text-white btn-lg px-4 py-2">
                 Watch Now
               </button>
             </div>
           </div>
           <div class="offset-xl-1 col-6 col-xl-5">
-            <video 
-            @mouseover="stopAutoPlay" @mouseout="resumeAutoPlay" 
-            class="trailer w-100 rounded-5" :src="currentMovie.trailer" autoplay loop muted controls></video>
+            <video @mouseover="stopAutoPlay" @mouseout="resumeAutoPlay" v-if="windowWidth >= 992"
+              class="trailer w-100 rounded-5" :src="currentMovie.trailer" autoplay loop muted controls></video>
           </div>
         </div>
 
@@ -43,54 +36,33 @@
             class="carousel-list-element poster bg-dark bg-opacity-75 rounded overflow-hidden text-white text-center w-25"
             @mouseover="handleHover(movie.id)" @mouseout="resumeAutoPlay">
             <figure class="mb-2">
-              <img
-                class="w-100 img-fluid rounded-top"
-                :src="movie.poster"
-                :alt="movie.title"
-              />
+              <img class="w-100 img-fluid rounded-top" :src="movie.poster" :alt="movie.title" />
             </figure>
             <div class="element-name small px-2 py-1">{{ movie.title }}</div>
           </li>
         </ul>
 
         <ul
-          class="mid-list carousel-list d-none d-md-flex d-xl-none d-flex justify-content-center gap-3 w-50 mt-5 m-auto"
-        >
-          <li
-            v-for="movie in movies"
-            :key="movie.id"
-            class="bg-dark bg-opacity-75 rounded shadow-sm w-25"
-            :class="{'bg-white': movie.id === currentMovie.id }">
+          class="mid-list carousel-list d-none d-md-flex d-xl-none d-flex justify-content-center gap-3 w-50 mt-5 m-auto">
+          <li v-for="movie in movies" :key="movie.id" class="bg-dark bg-opacity-75 rounded shadow-sm w-25"
+            :class="{ 'bg-white': movie.id === currentMovie.id }">
             <span class="mid-list-element"></span>
           </li>
         </ul>
 
-        <ul
-          class="small-list carousel-list d-md-flex d-xl-none d-flex justify-content-center gap-3 w-25 mt-5 m-auto"
-        >
-          <li
-            v-for="movie in movies"
-            :key="movie.id"
-            class="bg-dark bg-opacity-75 rounded shadow-sm"
-            :class="{'bg-white': movie.id === currentMovie.id }">
+        <ul class="small-list carousel-list d-flex d-md-none  gap-3 w-auto  mt-5 m-auto">
+          <li v-for="movie in movies" :key="movie.id" class="bg-dark bg-opacity-75 rounded shadow-sm"
+            :class="{ 'bg-white': movie.id === currentMovie.id }">
             <span class="mid-list-element"></span>
           </li>
         </ul>
 
-        <button
-          class="carousel-control-prev d-none d-md-block d-xl-none"
-          type="button"
-          @click="showPrev"
-        >
+        <button class="carousel-control-prev d-none d-md-block d-xl-none" type="button" @click="showPrev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
 
-        <button
-          class="carousel-control-next d-none d-md-block d-xl-none"
-          type="button"
-          @click="showNext"
-        >
+        <button class="carousel-control-next d-none d-md-block d-xl-none" type="button" @click="showNext">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -100,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed} from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 const windowWidth = ref(document.documentElement.clientWidth);
 const movies = ref([]);
 const currentIndex = ref(0);
@@ -117,7 +89,7 @@ const mobileTouchEvents = {
 };
 
 
-function updateWindowWidth(){
+function updateWindowWidth() {
   windowWidth.value = document.documentElement.clientWidth;
 };
 
@@ -155,14 +127,14 @@ function resumeAutoPlay() {
   startAutoPlay();
 }
 
-function showPrev(){
+function showPrev() {
   clearTimeout(timer);
   currentIndex.value = (currentIndex.value - 1 + movies.value.length) % movies.value.length;
   renderMovie(movies.value[currentIndex.value].id);
   resumeAutoPlay();
 }
 
-function showNext(){
+function showNext() {
   clearTimeout(timer);
   currentIndex.value = (currentIndex.value + 1) % movies.value.length;
   renderMovie(movies.value[currentIndex.value].id);
@@ -174,13 +146,13 @@ function showNext(){
 \*-----------------------------------*/
 const isMobile = computed(() => windowWidth.value <= 768);
 
-function handleTouchStart(e){
+function handleTouchStart(e) {
   startX = e.touches[0].clientX;
   isSwiping = true;
   stopAutoPlay();
 }
 
-function handleTouchMove(e){
+function handleTouchMove(e) {
   if (!isSwiping) return;
   moveX = e.touches[0].clientX - startX;
   const carouselEl = document.querySelector('.carousel');
@@ -194,12 +166,12 @@ function handleTouchMove(e){
   }
 }
 
-function handleTouchEnd(){
-  if(!isSwiping) return;
+function handleTouchEnd() {
+  if (!isSwiping) return;
   const threshold = 50;
-  if(moveX > threshold){
+  if (moveX > threshold) {
     showPrev();
-  } else if(moveX < -threshold){
+  } else if (moveX < -threshold) {
     showNext();
   }
   moveX = 0;
@@ -240,7 +212,7 @@ onBeforeUnmount(() => {
 }
 
 
-.carousel::before{
+.carousel::before {
   content: "";
   position: absolute;
   top: 0;
@@ -252,11 +224,12 @@ onBeforeUnmount(() => {
   transition: opacity 0.3s ease;
 }
 
-.carousel.swipe-left::before{
+.carousel.swipe-left::before {
   right: 0;
   background: radial-gradient(circle at right center, rgba(95, 95, 95, 0.9), transparent 70%);
   opacity: 1;
 }
+
 .carousel.swipe-right::before {
   left: 0;
   background: radial-gradient(circle at left center, rgba(95, 95, 95, 0.9), transparent 70%);
@@ -278,13 +251,16 @@ onBeforeUnmount(() => {
   aspect-ratio: 16 / 9;
   width: 100%;
 }
-.carousel-list{
+
+.carousel-list {
   width: 60%;
 }
-.carousel-list-element{
+
+.carousel-list-element {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
+
 .carousel-list-element:hover {
   transform: scale(1.15);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
@@ -293,8 +269,9 @@ onBeforeUnmount(() => {
 .carousel-list-element figure img {
   width: 100%;
 }
+
 .element-name {
-    display: none;
+  display: none;
 }
 
 .fade-enter-active,
@@ -319,11 +296,11 @@ onBeforeUnmount(() => {
   right: 40px;
 }
 
-.small-list li{
-  width: 10px;
-  height: 10px;
+.small-list li {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  border: 1.5px solid var(--citrine);
+  border: 0.7px solid var(--citrine);
 }
 
 .mid-list-element {
@@ -340,9 +317,11 @@ onBeforeUnmount(() => {
     margin-top: 0;
     margin-bottom: 0;
   }
+
   .intro div .word {
     min-width: 400px;
   }
+
   .mid-list {
     position: absolute;
     bottom: 20px;
@@ -350,15 +329,15 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (min-width: 992px){
-  .hero{
+@media (min-width: 992px) {
+  .hero {
     border-radius: 0;
     width: 100%;
     margin: 0;
   }
 
-  .mid-list{
-    position:relative
+  .mid-list {
+    position: relative
   }
 }
 
